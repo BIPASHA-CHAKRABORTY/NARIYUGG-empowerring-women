@@ -2,22 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>NARIYUGG – Create Account</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Personal Details</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <div class="container">
-    <h1 id="title">Enter Your Personal Details</h1>
-    <input type="text" id="name" placeholder="Full Name" />
-    <input type="email" id="email" placeholder="Email" />
-    <input type="text" id="experience" placeholder="Years of Experience" />
-    <input type="text" id="city" placeholder="City" />
-    <button onclick="submitDetails()">Submit</button>
+    <h1 id="title">Create Your NARIYUGG Account</h1>
+
+    <input type="text" id="name" placeholder="Full Name" required />
+    <input type="email" id="email" placeholder="Email Address" required />
+    <input type="password" id="password" placeholder="Create Password" required />
+
+    <input type="text" id="experience" placeholder="Years of Business Experience" />
+    <input type="text" id="city" placeholder="City / Village" />
+
+    <select id="language">
+      <option value="">Select Your Language</option>
+      <option value="English">English</option>
+      <option value="Hindi">Hindi</option>
+      <option value="Bengali">Bengali</option>
+      <option value="Tamil">Tamil</option>
+      <option value="Telugu">Telugu</option>
+      <option value="Marathi">Marathi</option>
+    </select>
+
+    <button onclick="registerUser()">Create Account</button>
+
     <p id="errorMessage" class="error"></p>
   </div>
 
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+  <!-- Firebase Config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBsoGwiW0e8Cq7JI6IoOEugipLlhegJXxs",
+      authDomain: "nariyugg.firebaseapp.com",
+      projectId: "nariyugg",
+      storageBucket: "nariyugg.firebasestorage.app",
+      messagingSenderId: "233396398792",
+      appId: "1:233396398792:web:ca292225b0a397df6d13fd"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
+
   <script src="script.js"></script>
+
 </body>
 </html>

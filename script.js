@@ -112,4 +112,29 @@ function verifyNumber() {
   function openHotel() {
     alert("Hotel connection page will open (dummy)");
   }
+function registerUser() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const name = document.getElementById("name").value;
+  const language = document.getElementById("language").value;
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+
+      // store user info in database
+      db.collection("users").doc(user.uid).set({
+        name: name,
+        email: email,
+        language: language
+      });
+
+      alert("Account created successfully!");
+      window.location.href = "main.html"; // go to dashboard
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+}
+
   

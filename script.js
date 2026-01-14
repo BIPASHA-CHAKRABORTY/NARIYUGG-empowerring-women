@@ -91,19 +91,36 @@ function verifyNumber() {
     }
   });
   
-  function submitDetails() {
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const experience = document.getElementById("experience").value;
-    const city = document.getElementById("city").value;
-  
-    if (name && email && experience && city) {
-      alert("Details submitted successfully!");
+  function registerUser() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const experience = document.getElementById("experience").value;
+  const city = document.getElementById("city").value;
+  const language = document.getElementById("language").value;
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+
+      return db.collection("users").doc(user.uid).set({
+        name,
+        email,
+        experience,
+        city,
+        language,
+        createdAt: new Date()
+      });
+    })
+    .then(() => {
+      alert("Account created!");
       window.location.href = "main.html";
-    } else {
-      document.getElementById("errorMessage").textContent = "Please fill all fields.";
-    }
-  }
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+}
+
   
   function openB2B() {
     alert("B2B contact page will open (dummy)");
